@@ -1,0 +1,118 @@
+.first-heading{
+    color:#ffc502;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.property-details-section-2 .property-details-container {
+    display: flex;
+    justify-content: flex-start;
+    gap: 30px;
+    align-items: center;
+}
+.property-section-2-first {
+    width: 20%;
+}
+.property-section-2-second {
+    width: 20%;
+}
+
+.property-section-2-third {
+    width: 20%;
+}
+.property-row-forth {
+    display: flex;
+}
+.property-section-2-second a img {
+    width: 100%;
+}
+
+.property-row {
+    display: flex;
+    font-size: 12px;
+    align-items: center;
+    gap: 30px;
+}
+
+.property-subcolumn a img {
+    width: 40%;
+}
+
+.slide {
+    width: 756px;
+    position: relative;
+    left: 0px;
+    top: 0px;
+    z-index: 998;
+    transition: opacity 500ms linear;
+}
+
+.property-section-2-forth {
+    width: 25%;
+}
+.second-heading {
+    font-size: 13px;
+    color: gray;
+}
+
+.property-subcolumn {
+    display: flex;
+    align-items: center;
+    width: 50%;
+}
+
+.property-subcolumn p {
+    font-size: 11px;
+    color: gray;
+}
+
+
+
+
+/*CSS for silk slider*/
+/* Main slider container */
+.custom-slider-section {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.slider-wrapper {
+    position: relative;
+}
+
+/* Main slider images */
+.main-slider .slide img {
+    width: 756px;
+    height: 602px;
+}
+
+/* Thumbnails navigation styling */
+.slider-thumbnails {
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+    gap: 10px;
+}
+
+.slider-thumbnails .thumb {
+    width: 60px;
+    height: 60px;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+}
+
+.slider-thumbnails .slick-center .thumb {
+    border: 2px solid #fff; /* Highlight active thumbnail */
+}
+.right-bg {
+    width: 33%;
+    height: 602px;
+    display: inline-block;
+    position: relative;
+    background-position: center;
+    filter: grayscale(100%);
+    background-size: cover;
+    margin-bottom: 7px;
+}
