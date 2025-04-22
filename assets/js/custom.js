@@ -13,7 +13,7 @@ jQuery(document).ready(function($) {
             },
             success: function(response) {
                 if (response.success) {
-                    console.log(response.data);
+                    console.log(response.data.container_background);
                     
                     // Replace content
                     $('.first-heading').text(response.data.first_text);
@@ -23,6 +23,7 @@ jQuery(document).ready(function($) {
                     $('.fifth-text').text(response.data.fifth_text);
                     $('.third-image').attr('src', response.data.third_image);
                     $('.fifth-image').attr('src', response.data.fifth_image);
+                    $('.right-bg').css('background-image', 'url(' + response.data.container_background + ')');
                     
                     // ✅ Update Previous Button
                     $('.prev-post-button')
@@ -71,7 +72,7 @@ jQuery(document).ready(function($) {
                     mainSlider.slick({
                         slidesToShow: 1,
                         slidesToScroll: 1,
-                        arrows: true,
+                        arrows: false,
                         dots: false,
                         infinite: true,
                         fade: true, // Optional, for fade effect between slides
@@ -90,6 +91,51 @@ jQuery(document).ready(function($) {
                         const index = $(this).index();
                         $('.main-slider').slick('slickGoTo', index);
                     });
+                    
+                    function handleMobileSlider() {
+                        if (window.innerWidth < 768) {
+                          // Prevent reinit
+                          if ($('#mainSlider').hasClass('slick-initialized')) {
+                            $('#mainSlider').slick('unslick');
+                          }
+                    
+                          // Remove Slick-related styles and classes
+                          $('#mainSlider .slide').each(function () {
+                            $(this)
+                              .removeAttr('style') // remove inline styles
+                              .removeClass('slick-slide slick-current slick-active')
+                              .addClass('mobile-visible') // Add helper class
+                              .css({
+                                'opacity': '1',
+                                'display': 'block',
+                                'visibility': 'visible',
+                                'width': '100%' // make image full width
+                              });
+                          });
+                    
+                          // Optional: Remove Slick DOM wrappers like .slick-track, .slick-list
+                          $('#mainSlider').removeClass('slick-initialized slick-slider');
+                          $('#mainSlider .slick-track, #mainSlider .slick-list').contents().unwrap().unwrap();
+                    
+                          // Hide thumbnail nav (if exists)
+                          $('.thumbnail-slider').hide(); // or any class you have for thumbs
+                        }
+                      }
+                    
+                      // Call on load
+                      handleMobileSlider();
+                    
+                      // Also call on resize if user switches screen size
+                      $(window).on('resize', function () {
+                        handleMobileSlider();
+                      });
+                      
+                     
+                    
+                    
+
+
+
                     
                     
                 }

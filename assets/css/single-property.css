@@ -1,3 +1,7 @@
+.property-container {
+    width: 95%!important;
+    position: relative;
+}
 .first-heading{
     color:#ffc502;
     font-size: 16px;
@@ -48,7 +52,7 @@
 }
 
 .property-section-2-forth {
-    width: 25%;
+    width: 20%;
 }
 .second-heading {
     font-size: 13px;
@@ -65,8 +69,16 @@
     font-size: 11px;
     color: gray;
 }
-
-
+.third-image {
+    width: 100%;
+    max-height:50px;
+}
+.prev-next{
+    text-align:right;
+}
+.property-details-section-2{
+    height:150px;
+}
 
 
 /*CSS for silk slider*/
@@ -107,12 +119,69 @@
     border: 2px solid #fff; /* Highlight active thumbnail */
 }
 .right-bg {
-    width: 33%;
+    width: 42%;
     height: 602px;
-    display: inline-block;
-    position: relative;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
     background-position: center;
     filter: grayscale(100%);
     background-size: cover;
     margin-bottom: 7px;
+    z-index: -3;
+}
+
+
+
+@media (min-width: 768px) {
+
+}
+
+/* Mobile-specific tweaks */
+@media (max-width: 767px) {
+    .property-details-container{
+        flex-direction:column;
+    }
+    .property-details-section-2 {
+    height: auto!important;
+    }
+    
+    .property-section-2-first {
+    width: 90%;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    }
+    
+    .property-column.third-logo.property-section-2-second {
+        width: 70%;
+    }
+    
+    .property-section-2-third {
+        width: 90%;
+    }
+    
+    .property-section-2-forth {
+        width: 90%;
+    }
+    #mainSlider .mobile-visible {
+    opacity: 1 !important;
+    left:0!important;
+    }
+    
+    #sliderThumbnails {
+    display: none !important;
+    }
+    .main-slider .slide img {
+    margin: 5px;
+    width:auto;
+    height:auto;
+    }
+    .right-bg{
+        display:none;
+    }
+
+
+
+
 }

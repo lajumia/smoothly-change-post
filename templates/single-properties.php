@@ -53,7 +53,7 @@
                     echo '<a href="' . esc_url($logo_url) . '" target="_blank" rel="nofollow">';
                   }
             
-                  echo '<img class="third-image" src="' . esc_url($logo_img_url) . '" alt="Property Logo" width="50" height="10" />';
+                  echo '<img class="third-image" src="' . esc_url($logo_img_url) . '"  />';
             
                   if (!empty($logo_url)) {
                     echo '</a>';
@@ -108,7 +108,7 @@
                     // Check if both URL and image are set
                     if ($forbes_url && $forbes_image_url) : ?>
                       <a href="<?php echo esc_url($forbes_url); ?>" target="_blank" rel="nofollow">
-                        <img class="fifth-image" src="<?php echo esc_url($forbes_image_url); ?>" alt="Forbes 5 Star" width="40" height="29" />
+                        <img class="fifth-image" src="<?php echo esc_url($forbes_image_url); ?>"/>
                       </a>
                     <?php endif; ?>
                 </div>
@@ -170,7 +170,7 @@
             $next_post_id = $post_ids[$next_index];
             ?>
         
-            <div class="property-section-2-first hidden-on-mobile">
+            <div class="property-section-2-first prev-next hidden-on-mobile">
                 <div class="post-nav">
                     <a class="prev prev-post-button"
                        href="<?php echo esc_url(get_permalink($prev_post_id)); ?>"
@@ -197,14 +197,7 @@
         
         </div>
     </section>
-    <!--<section style="padding: 20px 0;">-->
-    <!--  <div style="display: flex; justify-content: center; width: 100%;">-->
-    <!--    <div style="flex: 1; max-width: 100%;">-->
-          <!-- Spacer -->
-    <!--      <div style="height: 40px;"></div>-->
-    <!--    </div>-->
-    <!--  </div>-->
-    <!--</section>-->
+
     
     
     
@@ -215,27 +208,43 @@
         if ($gallery_images):
         ?>
         <section class="custom-slider-section">
-            <div class="slider-wrapper">
-        
-                <!-- Main Slider -->
-                <div id="mainSlider" class="main-slider">
-                    <?php foreach ($gallery_images as $image): ?>
-                        <div class="slide">
-                            <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
-                        </div>
-                    <?php endforeach; ?>
+            
+                <div class="slider-wrapper">
+            
+                    <!-- Main Slider -->
+                    <div id="mainSlider" class="main-slider">
+                        <?php foreach ($gallery_images as $image): ?>
+                            <div class="slide">
+                                <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+            
+                    <!-- Thumbnails -->
+                    <div id="sliderThumbnails" class="slider-thumbnails">
+                        <?php foreach ($gallery_images as $image): ?>
+                            <div class="thumb" style="width:106px!important;">
+                                <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+            
                 </div>
-        
-                <!-- Thumbnails -->
-                <div id="sliderThumbnails" class="slider-thumbnails">
-                    <?php foreach ($gallery_images as $image): ?>
-                        <div class="thumb">
-                            <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-        
-            </div>
+                <!--Background Right Image -->
+                <?php
+                // Get image ID from custom field (e.g., 'background_image')
+                $right_bg_image_id = get_post_meta(get_the_ID(), 'background_image', true);
+                
+                // Get full image URL
+                $right_bg_image_url = wp_get_attachment_image_url($right_bg_image_id, 'full');
+                
+                // Output the div with dynamic background if image exists
+                if ($right_bg_image_url): ?>
+                    <div class="right-bg" style="background-image: url('<?php echo esc_url($right_bg_image_url); ?>');"></div>
+                <?php else: ?>
+                    <div class="right-bg" style="background-color: #f0f0f0;"></div> <!-- Optional fallback -->
+                <?php endif; ?>
+              
         </section>
         <?php endif; ?>
 
@@ -246,15 +255,15 @@
 
 
 
- <!--Background Right Image -->
-    <!--<div class="right-bg" style="background-image:url('https://threearch.com/wp-content/uploads/2023/05/Penninsula-AdobeStock_242909567_bw-72.png');"></div>-->
+
+
 
 <script>jQuery(document).ready(function($) {
     // Initialize the main slider
     $('#mainSlider').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
-        arrows: true,
+        arrows: false,
         dots: false,
         infinite: true,
         fade: true, // Optional, for fade effect between slides
@@ -262,7 +271,7 @@
 
     // Initialize the thumbnail navigation
     $('#sliderThumbnails').slick({
-        slidesToShow: 6, // Number of thumbnails to show at once
+        slidesToShow: 8, // Number of thumbnails to show at once
         slidesToScroll: 1,
         asNavFor: '.main-slider', // Link thumbnails to main slider
         focusOnSelect: true, // Select a thumbnail on click
@@ -274,6 +283,26 @@
         const index = $(this).index();
         $('.main-slider').slick('slickGoTo', index);
     });
+    
+    if (window.innerWidth < 768) {
+          // Destroy Slick only if it's initialized
+        if ($('#mainSlider').hasClass('slick-initialized')) {
+          $('#mainSlider').slick('unslick');
+        }
+    
+        // Show all slides (force override any inline styles)
+        $('#mainSlider .slide').css({
+          'opacity': '1 !important',
+          'display': 'block !important',
+          'visibility': 'visible !important',
+        });
+        
+        $('#mainSlider .slide')
+        .removeAttr('style') // Clear inline styles
+        .removeClass('slick-slide slick-current slick-active slick-cloned')
+        .addClass('mobile-visible'); // Add helper class
+        
+    }
 });
 </script>
 

@@ -198,7 +198,8 @@ function fetch_custom_post_data_callback() {
     $third_image_field_url = wp_get_attachment_image_url(get_post_meta($post_id, 'third_image_element', true), 'large');
     $fourth_first_field = get_post_meta($post_id, 'fourth_first_paragraph', true);
     $fourth_second_field = get_post_meta($post_id, 'fourth_second_paragraph', true);
-    $fifth_image_filed_url = wp_get_attachment_image_url(get_post_meta($post_id, 'fifth_first_image', true), 'large');
+    $fifth_image_id = get_post_meta($post_id, 'fifth_first_image', true);
+    $fifth_image_filed_url = $fifth_image_id ? wp_get_attachment_image_url($fifth_image_id, 'large') : '';
     $fifth_text_field = get_post_meta($post_id, 'fifth_paragraph', true);
     $gallery_ids = get_post_meta($post_id, 'silk_slider_images', true);
     $background_image = wp_get_attachment_image_url(get_post_meta($post_id, 'background_image', true), 'large');
